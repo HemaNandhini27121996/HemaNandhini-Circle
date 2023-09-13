@@ -51,7 +51,7 @@ public class BackgroundStepDefinition {
 	
 	@After
 	public static void closeDriver() {
-			driver.close();
+			//driver.close();
 			Log.info("The driver is closed");
 		}
 		

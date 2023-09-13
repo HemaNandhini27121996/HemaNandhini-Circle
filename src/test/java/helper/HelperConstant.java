@@ -13,6 +13,9 @@ public class HelperConstant {
 	public static List<String> logList = new ArrayList<String>();
 	public static String scenarioTag;
 	
+	// Wait time
+	public static final int WAIT_30 = 30;
+	
 	
 	
 	public static String getScenarioTag() {
