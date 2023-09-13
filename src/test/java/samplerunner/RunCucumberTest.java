@@ -8,8 +8,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = {"src/test/java/features"},
-				glue = {"stepDefinitions" },
-		tags= {"@Regression"},
+				glue = {"stepdefinitions" },
+		tags= {"@Circle"},
 		plugin = {"pretty","html:target/cucumber", "json:target/cucumber.json"}
 		)
 
