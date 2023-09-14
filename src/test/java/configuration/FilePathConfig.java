@@ -1,9 +1,11 @@
 package configuration;
 
+/**
+ * FilePathConfig class
+ */
 public class FilePathConfig {
-    public static String workingDir = System.getProperty("user.dir");
 	
-	public static String chromeDriver = workingDir+"/Driver/chromedriver(1).exe";
-	
-	public static String ConnectionDetails = workingDir+"/PropertyFile/ConnectionDetails.txt";	
+	public static String workingDir = System.getProperty("user.dir");
+
+	public static String ConnectionDetails = workingDir + "/PropertyFile/ConnectionDetails.txt";
 }

@@ -8,13 +8,17 @@ import java.util.Map;
 
 import configuration.FilePathConfig;
 
-
+/**
+ * ReadProperty class
+ */
 public class ReadProperty {
-	
-	
 
 	public static final String ServiceUrlDetails = FilePathConfig.ConnectionDetails;
 
+	/**
+	 * Method to get the Service Properties
+	 * @throws IOException
+	 */
 	public static void getServiceProperties() throws IOException {
 		String inputFile = ServiceUrlDetails;
 		String eachLine;

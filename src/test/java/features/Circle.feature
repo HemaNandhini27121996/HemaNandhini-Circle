@@ -1,10 +1,13 @@
 @Circle
-Feature: Circle
-@Circle_F001_S001
-Scenario Outline: Sign Page
-Given I am a patient wanting a knee replacement
-When I put in my "<LOCATION>" and date of leave 5th May
-Then I can get a consultants* availability and location provided to make my decision
-Examples: 
-| LOCATION 		| 
-| RG1 7NP			| 
+Feature: I want to check for consultant availability for my knee replacement
+
+  @Circle_F001_S001
+  Scenario Outline: Login to Circle Health group and check for consultant for knee replacement surgery
+    Given I navigate to the Circle Health Group Website
+    When I select my "<LOCATION>" and preferred date of leave
+    Then I am able to book consultants based on locations
+    And I should see the consultant availability at the selected time
+
+    Examples: 
+      | LOCATION |
+      | RG1 7NP  |

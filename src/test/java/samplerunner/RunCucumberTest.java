@@ -5,6 +5,9 @@ import cucumber.api.junit.Cucumber;
 
 import cucumber.api.CucumberOptions;
 
+/**
+ * RunCucumber class
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = {"src/test/java/features"},

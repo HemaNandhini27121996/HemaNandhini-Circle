@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class HelperConstant {
 	
 	public static WebDriver driver;
+	public static String browser;
 	public static Map<String, String> propertyMap;
 	public static List<String> logList = new ArrayList<String>();
 	public static String scenarioTag;
@@ -18,6 +19,12 @@ public class HelperConstant {
 	
 	
 	
+	public static String getBrowser() {
+		return browser;
+	}
+	public static void setBrowser(String browser) {
+		HelperConstant.browser = browser;
+	}
 	public static String getScenarioTag() {
 		return scenarioTag;
 	}
