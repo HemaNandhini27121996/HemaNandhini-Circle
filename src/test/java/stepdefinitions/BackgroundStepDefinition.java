@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import configuration.FilePathConfig;
 import cucumber.api.Scenario;
@@ -12,9 +13,11 @@ import cucumber.api.java.Before;
 import helper.HelperConstant;
 import helper.Log;
 import helper.ReadProperty;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class BackgroundStepDefinition {
+	
 	public static WebDriver driver;
 
 	@Before
@@ -43,9 +46,11 @@ public class BackgroundStepDefinition {
 	
 
 	public static WebDriver openBroswer(WebDriver driver) {
-
-		System.setProperty("webdriver.chrome.driver", FilePathConfig.chromeDriver);
-		driver = new ChromeDriver();
+//		WebDriverManager.chromedriver().setup();
+//		driver = new ChromeDriver();
+		//System.setProperty("webdriver.chrome.driver", FilePathConfig.chromeDriver);
+		WebDriverManager.firefoxdriver().setup();
+		driver = new FirefoxDriver();		
 		return driver;
 	}
 	

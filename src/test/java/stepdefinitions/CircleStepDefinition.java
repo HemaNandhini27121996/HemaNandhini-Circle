@@ -27,9 +27,9 @@ public class CircleStepDefinition {
 	}
 
 	@Then("I can get a consultants* availability and location provided to make my decision")
-	public void i_can_get_a_consultants_availability_and_location_provided_to_make_my_decision() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public void i_can_get_a_consultants_availability_and_location_provided_to_make_my_decision() throws Exception {
+	    circle.clickShowMoreAppointments();
+	    circle.getTextFromOnlineBooking();
 	}
 
 

@@ -1,6 +1,7 @@
 package pages;
 
 import java.awt.Robot;
+import java.time.Duration;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,32 +23,25 @@ public class CircleHealthGroup {
 	}
 	
 	// WebElements
-		@FindBy(name = "login")
-		private static WebElement LOGIN_USERNAME;
-		@FindBy(name = "loginPwd")
-		private static WebElement LOGIN_PASSWORD;
-		@FindBy(id = "next")
-		private static WebElement LOGIN_NEXT;
-		@FindBy(xpath ="//*[@id='save']")
-		private static WebElement LOGIN_SAVE;
 		@FindBy(xpath="//*[@id='treatment'")
 		private static WebElement TREATMENTS;
 		@FindBy(xpath="//*[@id=\'location\']")
 		private static WebElement LOCATION;
-		@FindBy(xpath="//*[@id='//*[@id=\'digital-doorway\']/div[2]/div/form/div/button")
-		private static WebElement KNEE_REPLACEMENT_SURGERY;
-		@FindBy(xpath="//a[text()='Search']")
+		@FindBy(xpath="//*[text()='Search']")
 		private static WebElement SEARCH_BUTTON;
 		@FindBy(xpath="//*[text()='Accept all cookies']")
 		private static WebElement ACCEPT_ALL_COOKIES;
 		@FindBy(xpath="//a[text()='Book online']")
 		private static WebElement BOOK_ONLINE;
-		
+		@FindBy(xpath="//*[text()='Show more appointments']")
+		private static WebElement SHOW_MORE_APPOINTMENTS;
+		@FindBy(xpath="//*[@id=\'datepicker\']/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[15]/span")
+		private static WebElement SELECT_DATE;
+		@FindBy(xpath="//*[@id=\"digital-doorway\"]/div[3]/div/div/div/div[2]/div[2]/ul/li[1]/div/div[3]/div[2]/a[1]/span[2]")
+		private static WebElement BOOK_NOW;
+		@FindBy(xpath="//*[@id=\"online-booking\"]/div[3]/div[1]/div[2]/p[2]")
+		private static WebElement ONLINE_BOOKING;
 
-		public void typeUserName(String userName) {
-
-			HelperWebElement.type(driver, LOGIN_USERNAME, userName);
-		}
 
 		
 		public void navigateToTreatments() throws InterruptedException {
@@ -72,19 +66,26 @@ public class CircleHealthGroup {
 		}
 
 		public void enterPostCode(String Postcode) throws InterruptedException {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			WebElement postCode = wait.until(ExpectedConditions.elementToBeClickable(LOCATION));
 			HelperWebElement.type(driver, LOCATION, Postcode);
-			Thread.sleep(1000);
-			LOCATION.sendKeys(Keys.ENTER);
-			WebElement search = wait.until(ExpectedConditions.elementToBeClickable(SEARCH_BUTTON));
-			HelperWebElement.click(driver, search);
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			WebElement location = wait.until(ExpectedConditions.elementToBeClickable(LOCATION));
+			location.sendKeys(Keys.ENTER);
+			location.sendKeys(Keys.ENTER);
+			HelperWebElement.click(driver, SEARCH_BUTTON);
 			
 		}
 		
+		
 
-		public void clickSave() throws Exception {
+		public void clickShowMoreAppointments() throws Exception {
 			
-			HelperWebElement.click(driver, LOGIN_SAVE);
+			HelperWebElement.click(driver, SHOW_MORE_APPOINTMENTS);
+			HelperWebElement.click(driver, SELECT_DATE);
+			HelperWebElement.click(driver, BOOK_NOW);
+		}
+		
+		public void getTextFromOnlineBooking() {
+			String text = ONLINE_BOOKING.getText();
+			System.out.println(text);
 		}
 }
