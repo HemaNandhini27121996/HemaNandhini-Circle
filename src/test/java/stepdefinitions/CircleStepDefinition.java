@@ -11,11 +11,15 @@ import cucumber.api.java.en.When;
 import helper.HelperConstant;
 import pages.CircleHealthGroup;
 
+/**
+ * CircleStepDefinition class
+ */
 public class CircleStepDefinition {
 
 	public static WebDriver driver = HelperConstant.getDriver();
 	CircleHealthGroup circle = new CircleHealthGroup(driver);
 
+	/*User navigates to Circle Health Group*/
 	@Given("I navigate to the Circle Health Group Website")
 	public void i_navigate_to_the_circle_health_group_website() throws InterruptedException {
 		circle.navigateToTreatments();
@@ -23,6 +27,7 @@ public class CircleStepDefinition {
 		circle.bookOnline();
 	}
 
+	/*User selects the location and date of leave*/
 	@When("I select my {string} and preferred date of leave")
 	public void i_select_my_and_preferred_date_of_leave(String postcode) throws Exception {
 		circle.enterPostCode(postcode);
@@ -30,11 +35,13 @@ public class CircleStepDefinition {
 		circle.selectDate();
 	}
 
+	/*User book the consultant with the list of consultant available*/
 	@Then("I am able to book consultants based on locations")
 	public void i_am_able_to_book_consultants_based_on_locations() {
 		circle.clickBookNow();
 	}
 
+	/*User successfully books the consultant on the preferred time*/
 	@And("I should see the consultant availability at the selected time")
 	public void i_should_see_the_consultant_availability_at_the_selected_time() {
 		String actual = circle.getTextFromOnlineBooking();
