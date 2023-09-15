@@ -23,15 +23,14 @@ public class BackgroundStepDefinition {
 
 	/**
 	 * Method to open Driver
+	 * 
 	 * @param scenario
 	 * @throws IOException
 	 */
 	@Before
 	public static void OpenDriver(Scenario scenario) throws IOException {
-		
+
 		HelperConstant.setBrowser(System.getProperty("browser"));
-		
-		HelperConstant.setBrowser("Chrome");
 
 		String scenarioTag = scenario.getSourceTagNames().toString();
 
@@ -40,11 +39,11 @@ public class BackgroundStepDefinition {
 		HelperConstant.setScenarioTag(scenarioTag);
 
 		ReadProperty.getServiceProperties();
-        
+
 		driver = openBroswer(driver);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		
+
 		driver.get(HelperConstant.getPropertyMap().get("CircleHealthGroup_Url"));
 		HelperConstant.setDriver(driver);
 		Log.info("The driver is started and the application is launched");
@@ -53,33 +52,39 @@ public class BackgroundStepDefinition {
 
 	/**
 	 * Method to setup Browser
+	 * 
 	 * @param driver
 	 * @return
 	 */
 	public static WebDriver openBroswer(WebDriver driver) {
-		switch(HelperConstant.getBrowser()) {
-		  case "Chrome":
-			  WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
-		    break;
-		  case "FireFox":
-			  WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
-		    break;
-		  default:
-			  WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
+		switch (HelperConstant.getBrowser()) {
+		case "Chrome":
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+			break;
+		case "FireFox":
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+			break;
+		default:
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
 		}
 		// System.setProperty("webdriver.chrome.driver", FilePathConfig.chromeDriver);
 		return driver;
 	}
+	
 
 	/**
 	 * Method to close driver
+	 * 
+	 * @throws InterruptedException
 	 */
 	@After
 	public static void closeDriver() {
+
 		driver.close();
+
 		Log.info("The driver is closed");
 	}
 

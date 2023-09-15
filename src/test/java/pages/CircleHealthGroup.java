@@ -1,8 +1,11 @@
 package pages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import helperwebelements.HelperWebElement;
 
+/**
+ * CircleHealthGroup class
+ */
 public class CircleHealthGroup {
 
 	WebDriver driver;
@@ -39,10 +45,8 @@ public class CircleHealthGroup {
 	@FindBy(xpath = "//*[@id=\'online-booking\']/div[3]/div[1]/div[2]/p[2]")
 	private static WebElement ONLINE_BOOKING;
 
-	public void navigateToTreatments()  {
+	public void navigateToTreatments() throws InterruptedException {
 		driver.navigate().to("https://www.circlehealthgroup.co.uk/treatments/knee-replacement-surgery");
-		driver.manage().deleteAllCookies();
-
 	}
 
 	public void clickAcceptAllCookies() throws InterruptedException {
@@ -62,23 +66,30 @@ public class CircleHealthGroup {
 	}
 
 	public void enterPostCode(String Postcode) throws InterruptedException {
-		HelperWebElement.type(driver, LOCATION, Postcode);
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		WebElement location = wait.until(ExpectedConditions.elementToBeClickable(LOCATION));
+		HelperWebElement.type(driver, LOCATION, Postcode);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		location.sendKeys(Keys.ENTER);
-		location.sendKeys(Keys.ENTER);
-		HelperWebElement.click(driver, SEARCH_BUTTON);
+
+		Actions actions = new Actions(driver);
+		actions.sendKeys(location, Keys.ENTER);
+		actions.build().perform();
+
+		WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(SEARCH_BUTTON));
+		HelperWebElement.click(driver, searchButton);
 
 	}
 
 	public void clickShowMoreAppointments() {
-
 		HelperWebElement.click(driver, SHOW_MORE_APPOINTMENTS);
-
 	}
 
 	public void selectDate() {
-		HelperWebElement.click(driver, SELECT_DATE);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement selectDate = wait.until(ExpectedConditions.elementToBeClickable(SELECT_DATE));
+		HelperWebElement.click(driver, selectDate);
 	}
 
 	public void clickBookNow() {

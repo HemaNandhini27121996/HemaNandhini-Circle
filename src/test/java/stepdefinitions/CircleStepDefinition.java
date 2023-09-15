@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import org.openqa.selenium.WebDriver;
 
